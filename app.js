@@ -1,18 +1,14 @@
 const express = require('express');
 const app = express();
-const path = require('path');
 const fuzzysort = require('fuzzysort')
 const fs = require('fs');
 const port = process.env.PORT || 8080;
-
-// Serve static folder
-const htmlPath = path.join(__dirname, 'frontend');
-app.use(express.static(htmlPath));
 
 // Parse data from file
 const rawdata = fs.readFileSync('games.json');
 const data = JSON.parse(rawdata);
 
+// Search endpoint
 app.get('/search', function(req, res) {
     const query = req.query.query;
     res.send(fuzzysort.go(query, data, {
@@ -21,6 +17,7 @@ app.get('/search', function(req, res) {
     }));
 });
 
+// Redirect any other routes to /search
 app.get('/', function(req, res) {
     res.redirect("/search");
 });
