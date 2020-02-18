@@ -5,6 +5,11 @@ const fuzzysort = require('fuzzysort')
 const fs = require('fs');
 const port = 3000;
 
+// Serve static folder
+const htmlPath = path.join(__dirname, 'frontend');
+app.use(express.static(htmlPath));
+
+// Parse data from file
 const rawdata = fs.readFileSync('games.json');
 const data = JSON.parse(rawdata);
 
@@ -15,7 +20,5 @@ app.get('/search', function(req, res) {
         limit: 10
     }));
 });
-
-app.get('/', (req, res) =>  res.sendFile(path.join(__dirname + '/index.html')));
 
 app.listen(port, () => console.log('Server listening on port ' + port));

@@ -18,6 +18,7 @@
   "homepage": "https://github.com/joeyzhou98/mistplay-challenge#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "fuzzysort": "^1.1.4"
+    "fuzzysort": "^1.1.4",
+    "vue": "^2.6.11"
   }
 }
