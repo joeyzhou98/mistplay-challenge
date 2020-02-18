@@ -3,7 +3,7 @@ const app = express();
 const path = require('path');
 const fuzzysort = require('fuzzysort')
 const fs = require('fs');
-const port = 3000;
+const port = process.env.PORT || 8080;
 
 // Serve static folder
 const htmlPath = path.join(__dirname, 'frontend');
@@ -19,6 +19,10 @@ app.get('/search', function(req, res) {
         key: 'title',
         limit: 10
     }));
+});
+
+app.get('/', function(req, res) {
+    res.redirect("/search");
 });
 
 app.listen(port, () => console.log('Server listening on port ' + port));
